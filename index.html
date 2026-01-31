@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Prabhas's Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #14b8a6;
+            --secondary: #0d9488;
+            --accent: #5eead4;
+            --dark: #1f2937;
+            --darker: #111827;
+            --card-bg: #374151;
+            --card-hover: #4b5563;
+            --border: #4b5563;
+            --text: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --gradient: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+            --glow: rgba(20, 184, 166, 0.3);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(31, 41, 55, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1.2rem 5%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav h2 {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            padding: 120px 2rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .profile-upload {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        #hero-profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 10px 40px var(--glow);
+            cursor: pointer;
+            transition: all 0.4s;
+            background: var(--card-bg);
+        }
+
+        #hero-profile-pic:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(20, 184, 166, 0.4);
+        }
+
+        .upload-icon {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: var(--dark);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--glow);
+            transition: all 0.3s;
+        }
+
+        .upload-icon:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .hero-input {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            color: var(--text);
+            padding: 0.9rem 1.8rem;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            margin-top: 1rem;
+            width: 320px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .hero-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .hero-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--glow);
+        }
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text);
+            position: relative;
+            padding-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .about-content:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            border-color: var(--primary);
+        }
+
+        .about-content textarea {
+            width: 100%;
+            min-height: 160px;
+            padding: 1.2rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1.05rem;
+            resize: vertical;
+            transition: all 0.3s;
+            background: var(--darker);
+            color: var(--text);
+        }
+
+        .about-content textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--glow);
+        }
+
+        #about-display {
+            margin-top: 1.5rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .char-counter {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Skills Section */
+        .skills-input-area {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .skills-input-area input {
+            padding: 0.9rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1.05rem;
+            width: 280px;
+            background: var(--card-bg);
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .skills-input-area input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--glow);
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.05rem;
+            box-shadow: 0 4px 12px var(--glow);
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--glow);
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: var(--card-bg);
+            color: var(--text);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: slideIn 0.5s ease;
+            border: 2px solid var(--border);
+            position: relative;
+        }
+
+        
+
+        .skill-tag:hover::after {
+            display: flex;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px var(--glow);
+        }
+        /* Assignment Toggle */
+        .assignment-toggle {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .toggle-btn {
+            padding: 0.8rem 2rem;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .toggle-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--dark);
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .assignment-input-section {
+            display: none;
+        }
+
+        .assignment-input-section.active {
+            display: block;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: var(--card-hover);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            color: var(--text);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .card a:hover {
+            color: var(--accent);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .card:hover i {
+            transform: scale(1.1);
+        }
+
+        .card .badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: rgba(20, 184, 166, 0.15);
+            color: var(--primary);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            border: 1px solid rgba(20, 184, 166, 0.3);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--card-bg);
+            color: var(--text);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: var(--primary);
+            font-size: 2.5rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(20, 184, 166, 0.1);
+            border: 2px solid var(--border);
+        }
+
+        .contact-links a:hover {
+            transform: scale(1.15);
+            background: var(--primary);
+            color: var(--dark);
+            box-shadow: 0 6px 20px var(--glow);
+        }
+
+        .contact-input {
+            background: var(--darker);
+            border: 2px solid var(--border);
+            color: var(--text);
+            padding: 0.9rem 1.5rem;
+            border-radius: 8px;
+            margin: 0.5rem;
+            width: 260px;
+            transition: all 0.3s;
+        }
+
+        .contact-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .contact-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--glow);
+        }
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--dark);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--glow);
+            transition: all 0.3s;
+            z-index: 998;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px var(--glow);
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { padding: 100px 1rem 2rem 1rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            nav ul { gap: 1rem; font-size: 0.85rem; }
+            .section-title { font-size: 2rem; }
+            .input-group { flex-direction: column; align-items: center; }
+            #hero-profile-pic { width: 160px; height: 160px; }
+        }
+
+        /* Hide file inputs */
+        input[type="file"] {
+            display: none;
+        }
+
+        label.file-label {
+            padding: 0.9rem 1.5rem;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        label.file-label:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px var(--glow);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll to top button -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <h2>Prabhas's Portfolio</h2>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#assignments">Assignments</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <div class="hero-content">
+          <div class="profile-upload">
+               <img id="hero-profile-pic" src="profile.jpg" alt="Profile">
+
+             
+            </div>
+            <h1 id="hero-name" >Prabhas Semwal</h1>
+            <p id="hero-tagline">Aspiring data scientist and software developer</p>
+          
+        </div>
+    </div>
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <textarea id="about-input" placeholder="I’m a B.Tech Computer Science student passionate about coding, problem-solving, and creating impactful real-world projects. Currently exploring Data Structures, Algorithms, data science , cloud computing and modern development technologies . I’m driven by curiosity, hands-on experience, and the challenge of turning ideas into working solutions." maxlength="1000"></textarea>
+           
+            <div id=""></div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-input-area">
+           
+        </div>
+        <div class="skills-grid" id="skills-list">
+  <div class="skill-tag">C Programming</div>
+    <div class="skill-tag">Data Science with Python</div>
+    <div class="skill-tag">Data Structures</div>
+    <div class="skill-tag">Object-Oriented Programming(OOP) with c++</div>
+<div class="skill-tag">Web Development</div>
+
+</div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates">
+       
+
+ <section id="certificates">
+    <h2 class="section-title">Certificates</h2>
+
+    <div class="cards-grid" id="cert-list">
+
+        <!-- Certificate 1 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>AWS Certificate</h3>
+            <a href="https://drive.google.com/file/d/19VpJmcPlpXWnohfUslD-w6Z0yCivnbuP/view?usp=drive_link" target="_blank">
+                View Certificate →
+            </a>
+        </div>
+
+        <!-- Certificate 2 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>Grafest Certificate</h3>
+            <a href="https://drive.google.com/file/d/1-MQ0QL0PT1xHuUHuDO39L9fTEMToug8r/view?usp=drive_link" target="_blank">
+                View Certificate →
+            </a>
+        </div>
+
+        <!-- Certificate 3 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>IEEE Certificate</h3>
+            <a href="https://drive.google.com/file/d/1CBX2ES2ANa7U-tTugPIOnTM0EVso2fNt/view?usp=drive_link" target="_blank">
+                View Certificate →
+            </a>
+        </div>
+
+         <!-- Certificate 4 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>Fundamentals of Machine Learning and Artificial Intelligence</h3>
+            <a href="https://drive.google.com/file/d/1tGkRb5zeQ83Oz_38gsD0aVWLz7_OlASO/view?usp=drive_link" target="_blank">
+                View Certificate →
+            </a>
+        </div>
+<!-- Certificate 5 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>Exploring Artificial Intelligence Use Cases and Applications</h3>
+            <a href="https://drive.google.com/file/d/13WU3ZusYgnt3d0GLH-uvnE8lg1EGk9WT/view?usp=drive_link" target="_blank">
+                View Certificate →
+            </a>
+        </div>
+        <!-- Certificate 6 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3> Responsible Artificial Intelligence Practices</h3>
+            <a href="https://drive.google.com/file/d/108qdwAgDtsIfNa-tdOXISbdih2RoW3FZ/view?usp=drive_link" target="_blank">
+                View Certificate →
+            </a>
+        </div><!-- Certificate 7 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>AWS Cloud Practitioner Essentials</h3>
+            <a href="https://drive.google.com/file/d/1mEtctQTnphQfltZ7uDcbgGkOQA3JFbls/view?usp=sharing" target="_blank">
+                View Certificate →
+            </a>
+        </div>
+        <!-- Certificate 8 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>Introduction to AWS Identity and Access Management (IAM)</h3>
+            <a href="https://drive.google.com/file/d/1HE0BsatDhEENs3Vtp4vHMC_D5VGugml4/view?usp=drive_link" target="_blank">
+                View Certificate →
+            </a>
+        </div>
+        <!-- Certificate 9 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>Introduction to Amazon Simple Storage Service (S3)</h3>
+            <a href="https://drive.google.com/file/d/1gkZL3XD7IAStxOnx_Ak8-8JdYfHb1_Ai/view?usp=drive_link" target="_blank">
+                View Certificate →
+            </a>
+        </div>
+        <!-- Certificate 10 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>Cloud Essentials - Knowledge Badge Readiness Path (includes Labs)</h3>
+            <a href="https://drive.google.com/file/d/1fbiHh5rgyDRmru1Cm_9kf6q_uM4dBykG/view?usp=drive_link" target="_blank">
+                View Certificate →
+            </a>
+        </div><!-- Certificate 11 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>Exploring Artificial Intelligence Use Cases and Applications</h3>
+            <a href="https://drive.google.com/file/d/1rzbOYM6e6SJNGzfRV-N1s6qnM51byynT/view?usp=sharing" target="_blank">
+                View Certificate →
+            </a>
+        </div><!-- Certificate 12 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>AWS Billing and Cost Management</h3>
+            <a href="https://drive.google.com/file/d/1M1vtHNkoe9nAPL5ckCT_kJzCH5fU2EIH/view?usp=drive_link" target="_blank">
+                View Certificate →
+            </a>
+         </div><!-- Certificate 11 -->
+        <div class="card">
+            <i class="fas fa-award"></i>
+            <h3>Javascript Bootcamp Certificate</h3>
+            <a href="https://drive.google.com/file/d/1gMwoFn0MKjZlXzSQyPDyb-cgBlcGT9Wq/view?usp=drive_link" target="_blank">
+                View Certificate →
+            </a>    
+        
+      
+
+    </div>
+</section>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <section id="projects">
+  <h2 class="section-title">Projects</h2>
+  <div class="cards-grid" id="proj-list">
+
+      <!-- Just manually create card HTML -->
+      <div class="card">
+        <i class="fas fa-project-diagram"></i>
+        <h3>GEN-Scroll | DSA Stack Project</h3>
+        <a href="https://github.com/prabhassemwal20/PBL_DS.git" target="_blank">View Project →</a>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-project-diagram"></i>
+        <h3>MediCare+ | Patient Appointment & Health Management System</h3>
+        <a href="https://github.com/prabhassemwal20/PBL_PYTHON.git" target="_blank">View Project →</a>
+      </div>
+
+  </div>
+</section>
+    </section>
+
+    <!-- Assignments Section  -->
+
+    <section id="assignments">
+    <h2 class="section-title">Assignments</h2>
+
+    <div class="cards-grid" id="assign-list">
+        <!-- Link Assignment -->
+        <div class="card">
+            <div class="card-media">
+                <i class="fas fa-link" style="font-size:60px; margin-top:20px;"></i>
+            </div>
+            <h3 class="card-title">Linkedin Profile</h3>
+            <a href="http://www.linkedin.com/in/prabhas-semwal-a46355312" target="_blank" class="card-btn">Open Link</a>
+        </div>
+
+        <div class="card">
+            <div class="card-media">
+                <i class="fas fa-link" style="font-size:60px; margin-top:20px;"></i>
+            </div>
+            <h3 class="card-title">Group Presentation PPT</h3>
+            <a href="https://drive.google.com/file/d/1CzyyaV7LIeaATUtLAmsUIWzlkzcdRan4/view?usp=drive_link" target="_blank" class="card-btn">Open Link</a>
+        </div>
+        <div class="card">
+            <div class="card-media">
+                <i class="fas fa-link" style="font-size:60px; margin-top:20px;"></i>
+            </div>
+            <h3 class="card-title">PESE Handwritten Self-Profiling sheet Assignment</h3>
+            <a href="https://drive.google.com/file/d/17ppsoix8nbu97N45ZMRBwm86TkzT5AGm/view?usp=drive_link" target="_blank" class="card-btn">Open Link</a>
+        </div>
+        
+        
+        <!-- Video Assignment -->
+        <div class="card">
+    <div class="card-media">
+        <video width="100%" height="200" controls poster="cover.jpg">
+            <source src="intro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <h3 class="card-title">Introduction Video</h3>
+    <p class="card-desc">A Short Self Introduction Video Showcasing Background & Skills.</p>
+</div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <section id="contact">
+    <div class="contact-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Let's Connect!</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--text-secondary);">
+            Feel free to reach out through any platform
+        </p>
+
+        <div class="contact-links" id="contact-links">
+            <!-- LinkedIn -->
+            <a href="http://www.linkedin.com/in/prabhas-semwal-a46355312" target="_blank">
+                <i class="fab fa-linkedin"></i>
+            </a>
+
+ <!-- GitHub-->
+            <a href="https://github.com/prabhassemwal20" target="_blank">
+    <i class="fab fa-github"></i>
+</a>
+
+          
+ <!-- Email -->
+            <a href="mailto:semwalprabhas14@gmail.com">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+    </section>
+
+    <script>
+        // ---------- Hero Section ----------
+        document.getElementById('hero-pic-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) document.getElementById('hero-profile-pic').src = URL.createObjectURL(file);
+        });
+
+        document.getElementById('tagline-input').addEventListener('input', function() {
+            document.getElementById('hero-tagline').textContent = this.value || 'Professional Portfolio';
+        });
+
+        // ---------- About Section ----------
+        const aboutInput = document.getElementById('about-input');
+        aboutInput.addEventListener('input', function() {
+            document.getElementById('about-display').textContent = this.value;
+            document.getElementById('char-count').textContent = this.value.length;
+        });
+
+        // ---------- Skills ----------
+        function addSkill() {
+            const skill = document.getElementById('skill-input').value.trim();
+            if (!skill) return;
+            const tag = document.createElement('div');
+            tag.className = 'skill-tag';
+            tag.textContent = skill;
+            tag.title = 'Click to remove';
+            tag.onclick = function() { this.remove(); };
+            document.getElementById('skills-list').appendChild(tag);
+            document.getElementById('skill-input').value = '';
+        }
+
+        document.getElementById('skill-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addSkill();
+        });
+
+        // ---------- Certificates ----------
+        function addCertificate() {
+            const name = document.getElementById('cert-name').value.trim();
+            const file = document.getElementById('cert-file').files[0];
+            if (!name || !file) return;
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <i class="fas fa-award"></i>
+                <h3>${name}</h3>
+                <a href="${URL.createObjectURL(file)}" target="_blank">View Certificate</a>`;
+            document.getElementById('cert-list').appendChild(card);
+            document.getElementById('cert-name').value = '';
+            document.getElementById('cert-file').value = '';
+        }
+
+        // ---------- Projects ----------
+          function addProject() {
+            const name = document.getElementById('proj-name').value.trim();
+            const link = document.getElementById('proj-link').value.trim();
+            if (!name || !link) return;
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <i class="fas fa-project-diagram"></i>
+                <h3>${name}</h3>
+                <a href="${link}" target="_blank">View Project →</a>`;
+            document.getElementById('proj-list').appendChild(card);
+            document.getElementById('proj-name').value = '';
+            document.getElementById('proj-link').value = '';
+          }
+
+        // ---------- Assignments ----------
+        function toggleAssignmentType(type) {
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.assignment-input-section').forEach(sec => sec.classList.remove('active'));
+            if (type === 'file') {
+                document.querySelector('.toggle-btn:first-child').classList.add('active');
+                document.getElementById('file-section').classList.add('active');
+            } else {
+                document.querySelector('.toggle-btn:last-child').classList.add('active');
+                document.getElementById('link-section').classList.add('active');
+            }
+        }
+
+        function addAssignmentFile() {
+            const name = document.getElementById('assign-file-name').value.trim();
+            const file = document.getElementById('assign-file').files[0];
+            if (!name || !file) return;
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <i class="fas fa-book"></i>
+                <h3>${name}</h3>
+                <span class="badge">File Upload</span><br><br>
+                <a href="${URL.createObjectURL(file)}" target="_blank">View Assignment</a>`;
+            document.getElementById('assign-list').appendChild(card);
+            document.getElementById('assign-file-name').value = '';
+            document.getElementById('assign-file').value = '';
+        }
+
+        function addAssignmentLink() {
+            const title = document.getElementById('assign-link-title').value.trim();
+            const url = document.getElementById('assign-link-url').value.trim();
+            if (!title || !url) return;
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <i class="fas fa-book"></i>
+                <h3>${title}</h3>
+                <span class="badge">External Link</span><br><br>
+                <a href="${url}" target="_blank">View Assignment →</a>`;
+            document.getElementById('assign-list').appendChild(card);
+            document.getElementById('assign-link-title').value = '';
+            document.getElementById('assign-link-url').value = '';
+        }
+
+        // ---------- Contact ----------
+         function updateContact() {
+            const linkedin = document.getElementById('linkedin-url').value.trim();
+            const github = document.getElementById('github-url').value.trim();
+            const email = document.getElementById('email-address').value.trim();
+            const container = document.getElementById('contact-links');
+            container.innerHTML = '';
+            if (linkedin) {
+                const a = document.createElement('a');
+                a.href = linkedin;
+                a.target = '_blank';
+                a.innerHTML = '<i class="fab fa-linkedin"></i>';
+                container.appendChild(a);
+            }
+            if (github) {
+                const a = document.createElement('a');
+                a.href = github;
+                a.target = '_blank';
+                a.innerHTML = '<i class="fab fa-github"></i>';
+                container.appendChild(a);
+            }
+            if (email) {
+                const a = document.createElement('a');
+                a.href = `mailto:${email}`;
+                a.innerHTML = '<i class="fas fa-envelope"></i>';
+                container.appendChild(a);
+            }
+           }
+
+        // ---------- Scroll & Navigation ----------
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) scrollTopBtn.classList.add('show');
+            else scrollTopBtn.classList.remove('show');
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
+
